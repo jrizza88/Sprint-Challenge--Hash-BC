@@ -23,8 +23,14 @@ def proof_of_work(last_proof):
     start = timer()
 
     print("Searching for next proof")
+    # proof = last_proof * random.randint(0, 100)
     proof = 0
     #  TODO: Your code here
+
+    b_last_proof = f'{last_proof}'.encode()
+    last = hashlib.sha256(b_last_proof).hexdigest()
+    while valid_proof(last, proof) is False:
+        proof += 1
 
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
